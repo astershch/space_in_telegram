@@ -50,7 +50,11 @@ def main():
         'api_key': nasa_api_token,
     }
 
-    fetch_nasa_epic_images(nasa_epic_url, nasa_request_params, images_directory)
+    fetch_nasa_epic_images(
+        nasa_epic_url,
+        nasa_request_params,
+        images_directory,
+    )
 
 
 if __name__ == '__main__':
