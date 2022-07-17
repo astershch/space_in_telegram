@@ -65,7 +65,7 @@ python send_telegram_photo.py ./images/nasa_01.jpg
 python send_telegram_photos.py
 ```
 
-### send_telegram_photos.py
+### download_helpers.py
 Набор вспомогательных функций для работы скриптов.
 
 ## Цель проекта
