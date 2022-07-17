@@ -7,6 +7,19 @@ import telegram
 from dotenv import load_dotenv
 
 
+def choice_random_image(images_directory):
+    images = []
+
+    for root, dirs, files in os.walk(images_directory):
+        for file in files:
+            image = os.path.join(root, file)
+            images.append(image)
+
+    image = random.choice(images)
+
+    return image
+
+
 def main():
 
     load_dotenv()
@@ -14,7 +27,6 @@ def main():
     bot_token = os.environ['TG_BOT_TOKEN']
     chat_id = os.environ['TG_CHAT_ID']
     images_directory = os.environ['IMAGES_DIRECTORY']
-    images_directory = os.environ['TG_MAX_IMAGE_SIZE']
 
     bot = telegram.Bot(token=bot_token)
 
@@ -27,17 +39,10 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.image is not None:
-        image = args.image_path
+    if args.image:
+        image = args.image
     else:
-        images = []
-
-        for root, dirs, files in os.walk(images_directory):
-            for file in files:
-                image = os.path.join(root, file)
-                images.append(image)
-
-        image = random.choice(images)
+        image = choice_random_image(images_directory)
 
     with open(image, 'rb') as photo:
         bot.send_photo(chat_id=chat_id, photo=photo)

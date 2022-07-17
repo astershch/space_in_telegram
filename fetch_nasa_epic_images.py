@@ -7,7 +7,10 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from download_helpers import create_directory, download_image
+from download_helpers import download_image
+
+
+NASA_EPIC_URL = 'https://api.nasa.gov/EPIC/api/natural/images'
 
 
 def fetch_nasa_epic_images(url, params, directory):
@@ -40,18 +43,17 @@ def main():
 
     load_dotenv()
 
-    nasa_epic_url = os.environ['NASA_EPIC_URL']
     nasa_api_token = os.environ['NASA_API_TOKEN']
     images_directory = os.environ['IMAGES_DIRECTORY']
 
-    create_directory(images_directory)
+    Path(images_directory).mkdir(parents=True, exist_ok=True)
 
     nasa_request_params = {
         'api_key': nasa_api_token,
     }
 
     fetch_nasa_epic_images(
-        nasa_epic_url,
+        NASA_EPIC_URL,
         nasa_request_params,
         images_directory,
     )

@@ -2,7 +2,6 @@ import os
 
 import requests
 
-from pathlib import Path
 from urllib.parse import urlparse
 
 
@@ -21,7 +20,3 @@ def download_image(url, path, params=None):
 
     with open(path, 'wb') as file:
         file.write(response.content)
-
-
-def create_directory(directory):
-    Path(directory).mkdir(parents=True, exist_ok=True)

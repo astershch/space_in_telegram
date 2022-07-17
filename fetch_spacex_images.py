@@ -7,7 +7,10 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from download_helpers import download_image, create_directory
+from download_helpers import download_image
+
+
+SPACEX_URL = 'https://api.spacexdata.com/v5/launches'
 
 
 def fetch_spacex_images(url, directory, params):
@@ -27,10 +30,9 @@ def main():
 
     load_dotenv()
 
-    spacex_url = os.environ['SPACEX_URL']
     images_directory = os.environ['IMAGES_DIRECTORY']
 
-    create_directory(images_directory)
+    Path(images_directory).mkdir(parents=True, exist_ok=True)
 
     request_params = None
 
@@ -39,13 +41,11 @@ def main():
         'flight_id',
         help='use to get images of specific flight id or get latest if None',
         nargs='?',
+        default='latest',
     )
     args = parser.parse_args()
 
-    if args.flight_id is None:
-        spacex_url += '/latest'
-    else:
-        spacex_url += f'/{args.flight_id}'
+    spacex_url = f'{SPACEX_URL}/{args.flight_id}'
 
     fetch_spacex_images(spacex_url, images_directory, request_params)
 
