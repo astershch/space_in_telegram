@@ -6,13 +6,10 @@
 
 Для работы скриптов необходимо добавить переменные окружения (или файл .env в корне скриптов):
 - NASA_API_TOKEN - токен для работы с [API NASA](https://api.nasa.gov/)
-- NASA_APOD_URL - адрес API NASA APOD (https://api.nasa.gov/planetary/apod)
-- NASA_EPIC_URL - адрес API NASA EPIC (https://api.nasa.gov/EPIC/api/natural/images)
-- SPACEX_URL - адрес API SpaceX (https://api.spacexdata.com/v5/launches)
 - IMAGES_DIRECTORY - директория для хранения изображений
 - TG_BOT_TOKEN - токен бота Telegram
 - TG_CHAT_ID - название канала, в который будут опубликованы изображения
-- TG_PUBLICATONS_DELAY - задержка в часах после публикации каждой фотографии через [send_telegram_photos.py](#send_telegram_photospy)
+- TG_PUBLICATONS_DELAY - задержка в часах после публикации каждой фотографии через [send_telegram_photos.py](#send_telegram_photospy). По умолчанию - 4 часа.
 
 Python3 должен быть уже установлен. 
 Затем используйте `pip` (или `pip3`, есть есть конфликт с Python2) для установки зависимостей:
