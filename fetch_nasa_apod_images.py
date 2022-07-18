@@ -12,13 +12,13 @@ from download_helpers import (
 )
 
 
-NASA_APOD_URL = 'https://api.nasa.gov/planetary/apod'
 MAX_DOWNLOADED_PHOTO = 30
 
 
-def fetch_nasa_apod_images(url, params, directory):
+def fetch_nasa_apod_images(params, directory):
+    nasa_apod_url = 'https://api.nasa.gov/planetary/apod'
 
-    response = requests.get(url, params=params)
+    response = requests.get(nasa_apod_url, params=params)
     response.raise_for_status()
 
     for index, media in enumerate(response.json()):
@@ -46,9 +46,8 @@ def main():
     }
 
     fetch_nasa_apod_images(
-        NASA_APOD_URL,
         nasa_request_params,
-        images_directory
+        images_directory,
     )
 
 

@@ -10,12 +10,10 @@ from dotenv import load_dotenv
 from download_helpers import download_image
 
 
-NASA_EPIC_URL = 'https://api.nasa.gov/EPIC/api/natural/images'
+def fetch_nasa_epic_images(params, directory):
+    nasa_epic_url = 'https://api.nasa.gov/EPIC/api/natural/images'
 
-
-def fetch_nasa_epic_images(url, params, directory):
-
-    response = requests.get(url, params=params)
+    response = requests.get(nasa_epic_url, params=params)
     response.raise_for_status()
 
     for index, image in enumerate(response.json()):
@@ -53,7 +51,6 @@ def main():
     }
 
     fetch_nasa_epic_images(
-        NASA_EPIC_URL,
         nasa_request_params,
         images_directory,
     )

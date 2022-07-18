@@ -10,12 +10,10 @@ from dotenv import load_dotenv
 from download_helpers import download_image
 
 
-SPACEX_URL = 'https://api.spacexdata.com/v5/launches'
+def fetch_spacex_images(flight_id, directory):
+    spacex_url = f'https://api.spacexdata.com/v5/launches/{flight_id}'
 
-
-def fetch_spacex_images(url, directory, params):
-
-    response = requests.get(url, params)
+    response = requests.get(spacex_url)
     response.raise_for_status()
     useful_response = response.json()['links']['flickr']['original']
 
@@ -34,8 +32,6 @@ def main():
 
     Path(images_directory).mkdir(parents=True, exist_ok=True)
 
-    request_params = None
-
     parser = argparse.ArgumentParser()
     parser.add_argument(
         'flight_id',
@@ -45,9 +41,7 @@ def main():
     )
     args = parser.parse_args()
 
-    spacex_url = f'{SPACEX_URL}/{args.flight_id}'
-
-    fetch_spacex_images(spacex_url, images_directory, request_params)
+    fetch_spacex_images(args.flight_id, images_directory)
 
 
 if __name__ == '__main__':
