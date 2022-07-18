@@ -36,23 +36,25 @@ def main():
             for file in files:
                 image = os.path.join(root, file)
 
-                if image not in images:
-                    images.append(image)
-                    send_photo_with_delay(
-                        bot,
-                        image,
-                        chat_id,
-                        publications_delay,
-                    )
+                if image in images:
+                    continue
 
-        else:
-            image = random.choice(images)
-            send_photo_with_delay(
-                bot,
-                image,
-                chat_id,
-                publications_delay,
-            )
+                images.append(image)
+
+                send_photo_with_delay(
+                    bot,
+                    image,
+                    chat_id,
+                    publications_delay,
+                )
+
+        image = random.choice(images)
+        send_photo_with_delay(
+            bot,
+            image,
+            chat_id,
+            publications_delay,
+        )
 
 
 if __name__ == '__main__':
